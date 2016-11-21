@@ -37,57 +37,93 @@ if __name__ == '__main__':
             x1 <= 40
             answer :180
     """
-    s = Simplex([3, 2])
+    s = Simplex([3, 2], max_mode=True)
     s.add_constraint([2, 1], 100)
     s.add_constraint([1, 1], 80)
     s.add_constraint([1, 0], 40)
     print(s.solve())
     print(s.mat)
 
+    # """
+    # max 2x1 + 3x2 + 2x3
+    # st
+    # 2x1 + x2 + x3 <= 4
+    # x1 + 2x2 + x3 <= 7
+    # x3          <= 5
+    # x1,x2,x3>= 0
+    # answer :11
+    # """
+    # t = Simplex([2, 3, 2], max_mode=True)
+    # t.add_constraint([2, 1, 1], 4)
+    # t.add_constraint([1, 2, 1], 7)
+    # t.add_constraint([0, 0, 1], 5)
+    # print(t.solve())
+    # print(t.mat)
+    #
+    # """
+    #    max z = 2x1 - x2
+    #    st
+    #     2x1 - x2 <= 2
+    #     x1 - 5x2 <= -4
+    #     x1 ,x2 >= 0
+    #    answer :2
+    # """
+    # t = Simplex([2, -1], max_mode=True)
+    # t.add_constraint([2, -1], 2)
+    # t.add_constraint([1, -5], -4)
+    # print(t.solve())
+    # print(t.mat)
+    #
+    # """
+    #    max x1 + 14x2 +6x3
+    #    st
+    #     x1 + x2 + x3 <=4
+    #     x1 <= 2
+    #     x3 <= 3
+    #     3x2 + x3 >= 6
+    #     x1 ,x2 ,x3 >= 0
+    #    answer :-56
+    # """
+    # t = Simplex([1, 14, 6], max_mode=True)
+    # t.add_constraint([1, 1, 1], 4)
+    # t.add_constraint([1, 0, 0], 2)
+    # t.add_constraint([0, 0, 1], 3)
+    # t.add_constraint([0, -3, -1], -6)
+    # print(t.solve())
+    # print(t.mat)
+
     """
-       max 2x + 3y + 2z
-       st
-       2x + y + z <= 4
-       x + 2y + z <= 7
-       z          <= 5
-       x,y,z >= 0
-       answer :11
-    """
-    t = Simplex([2, 3, 2])
-    t.add_constraint([2, 1, 1], 4)
-    t.add_constraint([1, 2, 1], 7)
-    t.add_constraint([0, 0, 1], 5)
+           minimize -x1 - 14x2 - 6x3
+           st
+            x1 + x2 + x3 <=4
+            x1 <= 2
+            x3 <= 3
+            3x2 + x3 <= 6
+            x1 ,x2 ,x3 >= 0
+           answer :-32
+        """
+    t = Simplex([-1, -14, -6])
+    t.add_constraint([1, 1, 1], 4)
+    t.add_constraint([1, 0, 0], 2)
+    t.add_constraint([0, 0, 1], 3)
+    t.add_constraint([0, 3, 1], 6)
     print(t.solve())
     print(t.mat)
 
     """
-          max z = 2x1 - x2
-          st
-           2x1 - x2 <= 2
-           x1 - 5x2 <= -4
-           x1 ,x2 >= 0
-          answer :2
-       """
-    t = Simplex([2, -1])
-    t.add_constraint([2, -1], 2)
-    t.add_constraint([1, -5], -4)
-    print(t.solve())
-    print(t.mat)
-
-    """
-          max x1 + 14x2 +6x3
+          maximize x1 + 14x2 + 6x3
           st
            x1 + x2 + x3 <=4
            x1 <= 2
            x3 <= 3
-           3x2 + x3 >= 6
+           3x2 + x3 <= 6
            x1 ,x2 ,x3 >= 0
-          answer :56
-   """
-    t = Simplex([1, 14, 6])
+          answer :32
+    """
+    t = Simplex([1, 14, 6], max_mode=True)
     t.add_constraint([1, 1, 1], 4)
     t.add_constraint([1, 0, 0], 2)
     t.add_constraint([0, 0, 1], 3)
-    t.add_constraint([0, -3, -1], -6)
+    t.add_constraint([0, 3, 1], 6)
     print(t.solve())
     print(t.mat)
