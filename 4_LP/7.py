@@ -6,17 +6,18 @@ import numpy as np
 
 
 class Simplex(object):
-    def __init__(self, obj):
-        self.mat = np.array([[0] + obj]) * -1
+    def __init__(self, obj, max_mode=False):
+        self.max_mode = max_mode  # default is solve min LP, if want to solve max lp,should * -1
+        self.mat = np.array([[0] + obj]) * (-1 if max_mode else 1)
 
     def add_constraint(self, a, b):
         self.mat = np.vstack([self.mat, [b] + a])
 
     def solve(self):
-        n = len(self.mat) - 1  # the number slack variables we should add
-        temp = np.vstack([np.zeros((1, n)), np.eye(n)])  # add a diagonal array
+        m, n = self.mat.shape  # m - 1is the number slack variables we should add
+        temp, B = np.vstack([np.zeros((1, m - 1)), np.eye(m - 1)]), list(range(n - 1, n + m - 1))  # add diagonal array
         mat = self.mat = np.hstack([self.mat, temp])  # combine them!
-        while mat[0].min() < 0:
+        while mat[0, 1:].min() < 0:
             col = np.where(mat[0, 1:] < 0)[0][0] + 1  # use Bland's method to avoid degeneracy. use mat[0].argmin() ok?
             row = np.array([mat[i][0] / mat[i][col] if mat[i][col] > 0 else 0x7fffffff for i in
                             range(1, mat.shape[0])]).argmin() + 1  # find the theta index
@@ -24,7 +25,8 @@ class Simplex(object):
             mat[row] /= mat[row][col]
             ids = np.arange(mat.shape[0]) != row
             mat[ids] -= mat[row] * mat[ids, col:col + 1]  # for each i!= row do: mat[i]= mat[i] - mat[row] * mat[i][col]
-        return mat[0][0]
+            B[row] = col
+        return mat[0][0] * (1 if self.max_mode else -1), {B[i]: mat[i, 0] for i in range(1, m) if B[i] < n}
 
 
 if __name__ == '__main__':
@@ -89,5 +91,3 @@ if __name__ == '__main__':
     t.add_constraint([0, -3, -1], -6)
     print(t.solve())
     print(t.mat)
-
-
