@@ -18,7 +18,7 @@ class Simplex(object):
         temp, B = np.vstack([np.zeros((1, m - 1)), np.eye(m - 1)]), list(range(n - 1, n + m - 1))  # add diagonal array
         mat = self.mat = np.hstack([self.mat, temp])  # combine them!
         while mat[0, 1:].min() < 0:
-            col = np.where(mat[0, 1:] < 0)[0][0] + 1  # use Bland's method to avoid degeneracy. use mat[0].argmin() ok?
+            col = np.where(mat[0, 1:] < 0)[0][0] + 1  # use Bland's method to avoid degeneracy.
             row = np.array([mat[i][0] / mat[i][col] if mat[i][col] > 0 else 0x7fffffff for i in
                             range(1, mat.shape[0])]).argmin() + 1  # find the theta index
             if mat[row][col] <= 0: return None  # the theta is ∞, the problem is unbounded

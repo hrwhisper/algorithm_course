@@ -15,7 +15,7 @@ class Simplex(object):
 
     def _simplex(self, mat, B, m, n):
         while mat[0, 1:].min() < 0:
-            col = np.where(mat[0, 1:] < 0)[0][0] + 1  # use Bland's method to avoid degeneracy. use mat[0].argmin() ok?
+            col = np.where(mat[0, 1:] < 0)[0][0] + 1  # use Bland's method to avoid degeneracy.
             row = np.array([mat[i][0] / mat[i][col] if mat[i][col] > 0 else 0x7fffffff for i in
                             range(1, mat.shape[0])]).argmin() + 1  # find the theta index
             if mat[row][col] <= 0: return None  # the theta is ∞, the problem is unbounded
@@ -37,7 +37,7 @@ class Simplex(object):
             temp, mat[0] = np.copy(mat[0]), 0  # set first row value to zero, and store the previous value
             mat = np.hstack([mat, np.array([1] + [-1] * (m - 1)).reshape((-1, 1))])
             self._pivot(mat, B, row, mat.shape[1] - 1)
-            if self._simplex(mat, B, m, n)[0] != 0: return None  # the problem has not answer
+            if self._simplex(mat, B, m, n)[0] != 0: return None  # the problem has no answer
 
             if mat.shape[1] - 1 in B:  # if the x0 in B, we should pivot it.
                 self._pivot(mat, B, B.index(mat.shape[1] - 1), np.where(mat[0, 1:] != 0)[0][0] + 1)
@@ -182,5 +182,21 @@ if __name__ == '__main__':
     t.add_constraint([1, 0, 0], 2)
     t.add_constraint([0, 0, 1], 3)
     t.add_constraint([0, 3, 1], 6)
+    print(t.solve())
+    print(t.mat)
+
+    print("""
+              maximize x3
+              st
+               x1 <= 2
+               x2 <= 2
+               x3 <= 2
+               x1 ,x2 ,x3 >= 0
+              answer :2 x2 x2=1 x3=3
+        """)
+    t = Simplex([0, 0, 1], max_mode=True)
+    t.add_constraint([1, 0, 0], 2)
+    t.add_constraint([0, 1, 0], 2)
+    t.add_constraint([0, 0, 1], 2)
     print(t.solve())
     print(t.mat)
