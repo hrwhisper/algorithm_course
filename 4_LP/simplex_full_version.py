@@ -200,3 +200,17 @@ if __name__ == '__main__':
     t.add_constraint([0, 0, 1], 2)
     print(t.solve())
     print(t.mat)
+
+    print("""
+                  minimize 5x1 + 35x2 + 20x3
+                  st
+                   x1 - x2 - x3 <= -2
+                   -x1 - 3x2   <=-3
+                   x1 ,x2 ,x3 >= 0
+                  answer :2 x2 x2=1 x3=3
+            """)
+    t = Simplex([5, 35, 20])
+    t.add_constraint([1, -1, -1], -2)
+    t.add_constraint([-1, -3, 0], -3)
+    print(t.solve())
+    print(t.mat)

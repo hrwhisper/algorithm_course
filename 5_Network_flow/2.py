@@ -70,13 +70,13 @@ def test(row, col):
     n = len(col)
     s = 0
     t = m + n + 1
-    for i in range(1, m + 1):  # s link to [1,m]
+    for i in range(1, m + 1):  # link source s to [1,m]
         add_edge(0, i, row[i - 1])
         for j in range(m + 1, m + n + 1):  # row link to column
             add_edge(i, j, 1)
 
     for i in range(m + 1, m + n + 1):
-        add_edge(i, t, col[i - m - 1])
+        add_edge(i, t, col[i - m - 1])  # link column to sink t
 
     print(max_flow(m, n, s, t), sum(row), sum(col))
 
@@ -87,6 +87,7 @@ def test(row, col):
                 matrix[i - 1][edge.to - m - 1] = 1 - edge.cap
 
     print(is_correct(row, col, matrix))
+    return matrix
 
 
 def is_correct(row, col, matrix):
@@ -98,7 +99,7 @@ def is_correct(row, col, matrix):
 
 if __name__ == '__main__':
     # test()
-    with open('./problem2.data') as f:
+    with open('./problem2.data') as f, open('./2.out', 'w+') as fw:
         for i in range(3):
             f.readline()
 
@@ -109,7 +110,12 @@ if __name__ == '__main__':
             m, n = line.split(' ')
             row = list(map(int, lines.pop().strip().split(' ')))
             col = list(map(int, lines.pop().strip().split(' ')))
-            test(row, col)
+            matrix = test(row, col)
+            for row in matrix:
+                for x in row:
+                    fw.write(str(x) + ' ')
+                fw.write('\n')
+            fw.write('\n\n')
             # 2 1
             # 0 1
             # test([3, 1], [2, 2])

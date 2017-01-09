@@ -7,7 +7,7 @@ def can_be_a_graph(degrees):
     d_sum, n = sum(degrees), len(degrees)
     if d_sum & 1 or n * (n - 1) < d_sum or max(degrees) > n - 1: return False
     for n in range(n, -1, -1):
-        degrees.sort(reverse=True)
+        degrees.sort(reverse=True) # 可以每一次算完类似合并排序合并过程使得总复杂度为O(n^2)
         for i in range(1, n):
             if degrees[0] <= 0: break
             degrees[i] -= 1

@@ -44,7 +44,7 @@ g = collections.defaultdict(list)
 
 
 def test():
-    with open('./problem1.data', 'r') as f:
+    with open('./problem1.data', 'r') as f, open('./1.out', 'w+') as fw:
         for i in range(3):
             f.readline()
 
@@ -61,7 +61,9 @@ def test():
                 add_edge(i, x + m - 1, 1)
                 add_edge(i, y + m - 1, 1)
                 add_edge(s, i, 1)
-            print(binary_search(m, n, s, t))
+            ans = binary_search(m, n, s, t)
+            print(ans)
+            fw.write(str(ans) + '\n')
 
 
 def binary_search(m, n, s, t):
