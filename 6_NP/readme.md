@@ -95,7 +95,7 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 >
 > Winning may or may not be possible, depending upon the initial configuration. You must determine the given initial conguration is a winnable game configuration. Let **SOLITAIRE** = { \<G> |G is a winnable game configuration}. Prove that SOLITAIRE is NP-complete.
 
-首先，给定最终板子上的红色和蓝色石头的分布情况，我们只需要对每一列扫描，看其每一列是否颜色单一，然后对每一行扫描，看其每一行是否至少有一个石头。这只需要花费O(n^2^)的时间，因此Solitaire Game是NP为题。
+首先，给定最终板子上的红色和蓝色石头的分布情况，我们只需要对每一列扫描，看其每一列是否颜色单一，然后对每一行扫描，看其每一行是否至少有一个石头。这只需要花费O(n^2^)的时间，因此Solitaire Game是NP问题。
 
 为了证明Solitaire Game是NP完全问题，我们只需要证明 $3SAT \leq_p Solitaire\quad Game$ 问题即可。
 
