@@ -125,7 +125,7 @@ fte_i_k = fte = max(fte,pte+f[k])
 >
 > We use Cartesian coordinate system, defining the coasting is the x-axis. The seaside is above x-axis, and the land side below. Given the position of each island in the sea, and given the distance of the coverage of the radar installation, your task is to write a program to find the minimal number ofradar installations to cover all the islands. Note that the position of an island is represented by its x-y coordinates.
 >
->  ![1](img\1.jpg)
+>  ![1](./img\1.jpg)
 
 ### 思路
 
@@ -135,7 +135,7 @@ fte_i_k = fte = max(fte,pte+f[k])
 
 如图，一开始我们将雷达位置放在A最右边能达到的点P。接着对于点B的情况，由于距离大于d，而B可以放置的最右边位置为p2,那么我们将P移动到P2即可覆盖A和B。 而如果是点C的情况，在右边并且距离大于d，那么显然只能多个雷达了。
 
-  ![3](img\3.png)
+  ![3](./img\3.png)
 
 ### 代码
 
