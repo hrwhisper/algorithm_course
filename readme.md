@@ -18,13 +18,14 @@
 
 
 有问题或者错误欢迎在issue中提出！
+欢迎进行pull request.
 转载点名出处。
 
 ## 支持
 
 觉得好的话可以点击 **star**支持 或者**打赏**一点馒头钱=v=
 
-![alipay](img\alipay.jpg) 
+![alipay](./img/alipay.jpg) 
 
-![wechat_pay](img\wechat_pay.png)
+![wechat_pay](./img/wechat_pay.png)
 
