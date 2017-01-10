@@ -57,7 +57,7 @@ def find_median(A, B):
 
 ### 子问题关系图
 
- ![1](./img\1.png)
+ ![1](./img/1.png)
 
 ### 正确性证明
 
@@ -130,7 +130,7 @@ def partition(L, R, A):
 
 ### 子问题关系图
 
-  ![2](./img\2.png)
+  ![2](./img/2.png)
 
 ### 正确性证明
 
@@ -209,7 +209,7 @@ def search_local_minimum(root):
 
 下面的图中，打X的说明不需要进行遍历。
 
-  ![3](./img\3.png)
+  ![3](./img/3.png)
 
 ### 正确性证明
 
@@ -238,7 +238,7 @@ def search_local_minimum(root):
 
 为了方便说明，将图标记为蓝色、绿色，分别表示一个区域的边界、两个区域（或者四个区域）的交界。
 
-​    ![4](./img\4.png)
+​    ![4](./img/4.png)
 
 我们每次从上图中蓝色、绿色所有的点进行比较，找到其最小值，记录其下标为min_x,min_y。
 
@@ -407,7 +407,7 @@ def solve_largest_minimum_spacing(L, M, N, rocks):
 
 ### 子问题关系图
 
-   ![5](./img\5.png)
+   ![5](./img/5.png)
 
 ### 正确性证明
 
@@ -491,7 +491,7 @@ def merge(L, le, R, a):
 
 和合并排序类似，过程如下：（在合并过程中进行计数已经用红色的数字标识出来。）
 
- ![6](./img\6.png)
+ ![6](./img/6.png)
 
 ### 正确性证明
 

@@ -151,7 +151,7 @@ $$
 
 原始问题：
 
-![6](./img\6.png)
+![6](./img/6.png)
 $$
 \begin{array}{rrrl}
  \max &0 && \\
