@@ -25,6 +25,8 @@
 
 觉得好的话可以点击 **star**支持 或者**打赏**一点馒头钱=v=
 
+<img src="/img/alipay.jpg" width="250">
+
 ![alipay](./img/alipay.jpg) 
 
 ![wechat_pay](./img/wechat_pay.png)
