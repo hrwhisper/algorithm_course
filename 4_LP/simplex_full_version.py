@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Date    : 2016/11/17
 # @Author  : hrwhisper
-# solve not answer case
+# more details : https://www.hrwhisper.me/introduction-to-simplex-algorithm/
 
 import numpy as np
 
