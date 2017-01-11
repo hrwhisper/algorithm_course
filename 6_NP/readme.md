@@ -65,7 +65,7 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 
 > In the Half-3SAT problem, we are given a 3SAT formula  with n variables and m clauses, where m is even. We wish to determine whether there exists an assignment to the variables of  such that exactly half the clauses evaluate to false and exactly half the clauses evaluate to true. Prove that Half-3SA problem is in NP-complete.
 
-首先，给定一个有m个子句的 Half-3SAT问题，显然，我们可以在多项式时间内判断其是否是可满足的，即是否有$\frac{m}{2}$个子句为真，$\frac{m}{2}$个子句为假，因此， Half-3SAT可以在多项式时间验证，它是NP问题。
+首先，给定一个有m个子句的 Half-3SAT问题以及n个变量的赋值，显然，我们可以在多项式时间内判断其是否是可满足的，即是否有$\frac{m}{2}$个子句为真，$\frac{m}{2}$个子句为假，因此， Half-3SAT可以在多项式时间验证，它是NP问题。
 
 为了证明Half-3SAT是NP完全问题，我们只需要证明 $3SAT \leq_p Half-3SAT$ 问题即可。
 
@@ -91,7 +91,7 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 
 ## 4. Solitaire Game
 
-> In the following solitaire game, you are given an n X n board. On each of its n^2^ positions lies either a blue stone, a red stone, or nothing at all. You play by removing stones from the board so that each column contains only stones of a single color and each row contains at least one stone. You win if you achieve this objective.
+> In the following solitaire game, you are given an n x n board. On each of its n^2^ positions lies either a blue stone, a red stone, or nothing at all. You play by removing stones from the board so that each **column** contains **only stones of a single color** and each **row** contains **at least one stone**. You win if you achieve this objective.
 >
 > Winning may or may not be possible, depending upon the initial configuration. You must determine the given initial conguration is a winnable game configuration. Let **SOLITAIRE** = { \<G> |G is a winnable game configuration}. Prove that SOLITAIRE is NP-complete.
 
@@ -99,7 +99,12 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 
 为了证明Solitaire Game是NP完全问题，我们只需要证明 $3SAT \leq_p Solitaire\quad Game$ 问题即可。
 
-对于一个3SAT问题，假设有N个变量，M个子句，那么我们设n = max(M,N)
+对于一个3SAT问题，假设有N个变量，M个子句，若 $N \ne M$：
+
+- N > M: 那么创建N - M个子句 $p \lor \neg p \lor q$的子句，这些子句不会对3SAT解照成影响。
+- N < M: 那么创建M - N个不会被使用的变量。
+
+接着我们设我们设n = max(M,N)，创建$n \times n$的板子。
 
 我们将每一行对应一个子句，每一列对应一个变量。对于子句中$x_i$的变量，我们用蓝色圆形石头表示，对于子句中$\neg x_i$的变量，我们用红色三角形的石头表示。
 
@@ -107,7 +112,7 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 
 ![4](./img/4.png)
 
-若变量$x_i = True$，我们移除红色三角形石头，否则，移除蓝色圆形石头。
+若变量$x_i$为True，我们移除红色三角形石头，否则，移除蓝色圆形石头。
 
 以$x_1 = True ,x_2 = True ,x_3 = False,x_4=True,x_5 =True $ 如下图所示
 
@@ -115,15 +120,15 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 
 
 
-这个赋值在SAT是为真的，而我们的Solitaire Game同样可以为真，在下面的$t_3 , t_4,t_5$ 中，只需要保证每一行都有一个石头，该石头与该列赋值一致即可（如$x_1 = True$那么放置蓝色石头，$x_4 = True$放置红色石头）。
+这个赋值在SAT是为真的，而我们的Solitaire Game同样可以为真，在下面的$t_3 , t_4,t_5$ 中，只需要保证每一行都有一个石头，该石头与该列赋值一致即可（如$x_1 = True$那么放置蓝色石头，$x_3 = False$放置红色石头）。
 
 而3SAT赋值为假的情况又如何呢？$x_1 = False,x_2 = False,x_3 = True,x_4=True,x_5 =False$为使得$ (x_1 \lor x_2 \lor\neg x_3)  \land  (x_3 \lor \neg x_4 \lor x_5) $ 为假的一组赋值。移除对应的石头有：
 
 ![4_false](./img/4_false.png)
 
-而无论下面的$t_3 , t_4,t_5$ 如何赋值，第一行都是空的，不符合条件，Solitaire Game无解。
+而无论下面的$t_3 , t_4,t_5​$ 如何赋值，第一行都是空的，不符合条件，Solitaire Game无解。
 
-其实上述的移除石头的过程原理是：用列来保证只有一种颜色（要么赋值为真-蓝色，要么赋值为假-红色），而用行来保证每行至少有一个石头（该变量为真石头得到保留）。
+其实上述的移除石头的过程原理是：**用列来保证只有一种颜色**（要么赋值为真-蓝色，要么赋值为假-红色），而**用行来保证每行至少有一个石头**（该变量为真石头得到保留）。
 
 因此有$3SAT \leq_p Solitaire\quad Game$  ，所以Solitaire Game是NP完全问题。
 

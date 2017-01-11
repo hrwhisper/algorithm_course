@@ -24,7 +24,7 @@
 首先，判断满足如下条件：
 
 - 度数和为偶数 （对于无向图，每条边贡献两个度，因此度数和必为偶数）
-- 总边数不超过 $ \frac{n*(n-1)}{2} $ 在（完全的简单图，最大度不超过n-1）
+- 总边数不超过 $ \frac{n*(n-1)}{2} $ 在（完全的简单图，**最大度不超过n-1**）
 
 接着，我们每次排序（逆序），首先把最大的度数（设为k）安排出去，看看是否足够多的点（k个）来满足它需要的边（就是从前往后扫，每个度－1）。如果不够，说明只能安排重边，即不能构成简单图。
 
@@ -52,8 +52,6 @@ def can_be_a_graph(degrees):
 如果给定的n个节点的度能构成简单图，那么必然满足上面的两个判断条件。
 
 紧接着，我们每次排序（逆序），如果能构成简单的图，度数最大的点x（设度数为k）必然可以从其他较大的k个节点中连接一条边，因此如果有k个节点，那么不会有重边出现，这个点可以安排，如果不满足k个节点，显然不能构成简单图。
-
-
 
 ### 时间复杂度分析
 
@@ -111,7 +109,7 @@ fte_i_k = fte = max(fte,pte+f[k])
 
 由于f[i] > f[k],那么有fte_k\_i > fte_k\_i\_1（因为f[i] > f[k]并且pte变大了）
 
-而 fte_i_k >= fte\_i\_k\_1（pte变大，但是fk] < f[i]），也就是说，交换i和k不会增大fte的值。
+而 fte_i_k >= fte\_i\_k\_1（pte变大，但是f[k] < f[i]），也就是说，交换i和k不会增大fte的值。
 
 因此，我们的贪心算法是正确的。
 
@@ -155,7 +153,7 @@ def min_radar(points, d):
     px = points[0].x + sqrt(d * d - points[0].y * points[0].y)
     ans = 1
     for i in range(1,len(points)):
-        if (px - points[i].x)**2 + points[i].y * points[i].y <= d*d: continue
+        if (px - points[i].x)**2 + points[i].y ** 2 <= d*d: continue
         cx = points[i].x + sqrt(d * d - points[i].y * points[i].y)
         if cx < px:
             px = cx

@@ -136,7 +136,7 @@ def rob_circle2(nums):
 
 该题正确性的证明在于对状态转移方程的正确性证明。
 
-对于i不抢，显然只能为dp[i-2]，而抢显然为dp[i-2] + nums[i]，因此我们只需要取其最大值即可。
+对于i不抢，显然只能为dp[i-1]，而抢显然为dp[i-2] + nums[i]，因此我们只需要取其最大值即可。
 
 环形情况同理。
 
@@ -151,10 +151,8 @@ def rob_circle2(nums):
 
 ## 3. Partition
 
-> Given a string s, partition s such that every substring of the partition is a palindrome. Return
-> the minimum cuts needed for a palindrome partitioning of s.
-> For example, given s = “aab", return 1 since the palindrome partitioning ["aa", "b"] could
-> be produced using 1 cut.
+> Given a string s, partition s such that every substring of the partition is a palindrome. Return the minimum cuts needed for a palindrome partitioning of s.
+> For example, given s = “aab", return 1 since the palindrome partitioning ["aa", "b"] could be produced using 1 cut.
 
 ### 问题分析（最优子结构及DP表达式）
 
@@ -282,7 +280,7 @@ def decoding_ways(s):
 
 > A frog is crossing a river. The river is divided into x units and at each unit there may or may not exist a stone. The frog can jump on a stone, but it must not jump into the water.
 >
-> If the frog’s last jump was k units, then its next jump must be either k −1,k, or k +1 units. Note that the frog can only jump in the forward direction.
+> If the frog’s last jump was k units, then its next jump must be either k −1, k, or k +1 units. Note that the frog can only jump in the forward direction.
 >
 > Given a list of stones’ positions (in units) in sorted ascending order, determine if the frog is able to cross the river by landing on the last stone. Initially, the frog is on the first stone and assume the first jump must be 1 unit.
 
@@ -292,9 +290,27 @@ def decoding_ways(s):
 
 因此对于到达了某一个点，我们可以查看其上一次是从哪个点跳过来的。
 
+设dp[ j ]\[ i ] 为从i到达j 的步数，初始时把所有的石头存放进hash表。然后设置dp\[0][0] = 0. 接着对于每个石头，从可以到达该石头的所有石头中取出步数k（k > 0），然后当前的stone + k看其是否是合法的石头，是的话就有d\[stone + k ][stone] = k
+
+```
+def can_cross(stones):
+    dp = {stone: {} for stone in stones}
+    dp[0][0] = 0
+    for stone in stones:
+        for step in dp[stone].values():
+            for k in [step + 1, step, step - 1]:
+                if k > 0 and stone + k in dp:
+                    dp[stone + k][stone] = k
+    return len(dp[stones[-1]].keys()) > 0
+```
+
+
+
+### 原来的方法
+
 设dp[ j ]\[ i ] 从i可以到达j，因此，对于点 j，我们只需要查看可以从哪个地方跳转过来（这里假设为i），然后查看其跳跃的距离$step = stones[j] - stones[i]$ , 则下一次的跳的距离为$step + 1, step, step - 1$ ，然后查看下一个点\_id存不存在（用Hash），存在将dp\[\_id][j] 设置为可达 ,若$\_id==n-1$，说明到达了对岸。这样复杂度为O(n^2^)
 
-### 代码
+#### 代码
 
 在具体的实现上，使用了类似邻接表的方式来加快速度。
 

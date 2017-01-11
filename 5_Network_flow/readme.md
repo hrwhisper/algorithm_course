@@ -131,7 +131,7 @@ def test(m, n, row, col):
 遍历E中的边，重复下述的过程：
 
 - 对于当前的边e~i~，将其容量+1
-- 继续运行最大流算法，得到新的最小割 C~i~ ， 其大小为|C~i~|
+- 继续运行最大流算法，得到新的最小割 C~i~ ， 其大小(即最大流流量)为|C~i~|
 - 若|C~i~| = |C|, 说明|C~i~| 也是最小割，就是说G的最小割不唯一，return False
 - 恢复e~i~ 的值
 
@@ -293,11 +293,13 @@ $$
 $$
 We add a 'weight'  which is called y~e~ for every edge. 
 
-The two constraints says every path has a non-negative weight and sum of  every path's weight must be at least 1. Actually, given a cut A-B(and $s \in A, t\in B​$) ,  if  edge e connect A and B(in other words,  $u \in A, v\in B\quad(u,v) ​$ is two vertices of edge e，and $ (u,v)​$ is  a cut edge ),we set  y~e~ = 1, otherwise, we set y~e~ = 0.
+The two constraints says every path has a non-negative weight and sum of  every path's weight must be at least 1. Actually, given a cut A-B(and $s \in A, t\in B$) ,  if  edge e connect A and B(in other words,  $u \in A, v\in B\quad(u,v) $ is two vertices of edge e，and $ (u,v)$ is  a cut edge ),we set  y~e~ = 1, otherwise, we set y~e~ = 0.
 
 So, the objective function is just to minimize the sum of capacity multiply its weight. Obviously, it is designed  to solve the minimum cut problem.
 
+目标函数中 $y_e$ 表示一条边选或者不选，为1选，为2不选，因此目标函数是求最小割。
 
+第一个约束条件表示从s到t中的路径，至少有一条边在割上。
 
 
 

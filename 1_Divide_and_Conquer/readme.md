@@ -169,7 +169,7 @@ $$
 在平均情况下，我们选择的一般不是最好也不是最差。和快速排序的平均复杂度证明类似，本算法也可以证明平均复杂度为O(n)
 
 ## Problem 3.
-> Consider an n-node complete binary tree T, where n = 2^d^ − 1 for some d. Each node v of T is labeled with a real number xv. You may assume that the real numbers labeling the nodes are all distinct. A node v of T is a local minimum if the label x~v~ is less than the label x~w~ for all nodes w that are joined to v by an edge.
+> Consider an n-node complete binary tree T, where n = 2^d^ − 1 for some d. Each node v of T is labeled with a real number x~v~. You may assume that the real numbers labeling the nodes are all distinct. A node v of T is a local minimum if the label x~v~ is less than the label x~w~ for all nodes w that are joined to v by an edge.
 > You are given such a complete binary tree T, but the labeling is only specified in the following implicit way: for each node v, you can determine the value x~v~ by probing the node v. Show how to find a local minimum of T using only O(logn) probes to the nodes of T.
 
 ### 思路与代码
@@ -368,7 +368,7 @@ $$
 $$
 min(rocks[i] - rocks[i-1] , i ∈ [1,N + 1]) < = d <= L
 $$
-因此，我们可以用二分的方法猜测该最小距离。设当前的范围[left,right)。 每次我们查看 left 和 right的中点mid，该mid就是我们猜测的最小的距离的最大值，然后对rocks中，间距不大于mid的进行计数（这些就是要删除的点），记为cnt。
+因此，我们可以用二分的方法猜测该最小距离。设当前的范围[left,right)。 每次我们查看 left 和 right的中点mid，该mid就是我们猜测的最小的距离的最大值，然后对rocks中，间距**不大于**mid的进行计数（这些就是要删除的点），记为cnt。
 
 - cnt > M: 说明该mid值太大了，需要减小，区间变为 [left,mid)
 - cnt < M: 说明mid太小，区间变为 [mid+1,right)
@@ -399,7 +399,7 @@ def solve_largest_minimum_spacing(L, M, N, rocks):
     rocks = [0] + rocks + [L]
     N += 2
     rocks.sort()
-    left = min(rocks[i] - rocks[i - 1] for i in range(1, N))
+    left = min(rocks[i] - rocks[i - 1] for i in range(1, N)) # left start with 0 is ok.
     return binary_search(left, L + 1, rocks, M, N)
 
 # solve_largest_minimum_spacing(L, M, N, rocks)
@@ -430,7 +430,7 @@ def solve_largest_minimum_spacing(L, M, N, rocks):
 ## Problem 6.
 
 > Recall the problem of finding the number of inversions. As in the course, we are given a sequence of n numbers a1,··· ,an, which we assume are all distinct, and we difine an inversion to be a pair i < j such that ai > aj.
-> We motivated the problem of counting inversions as a good measure of how different two orderings are. However, one might feel that this measure is too sensitive. Let’s call a pair a significant inversion if i < j and ai > 3aj. Given an O(nlogn) algorithm to count the number of significant inversions between two orderings.
+> We motivated the problem of counting inversions as a good measure of how different two orderings are. However, one might feel that this measure is too sensitive. Let’s call a pair a significant inversion if i < j and ai > 3a~j~. Given an O(nlogn) algorithm to count the number of significant inversions between two orderings.
 
 ### 思路与代码
 
