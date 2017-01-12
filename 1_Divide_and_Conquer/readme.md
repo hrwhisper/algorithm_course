@@ -508,6 +508,40 @@ T(n) = 2T(n/2) + cn
 $$
 因此总复杂度仍为O(nlogn)
 
+
+
+
+
+## Problem 7.
+
+> A group of n Ghostbusters is battling n ghosts. Each Ghostbuster is armed with a proton
+> pack, which shoots a stream at a ghost, eradicating it. A stream goes in a straight line and terminates when it hits the ghost. The Ghostbusters decide upon the following strategy. They will pair off with the ghosts, forming n Ghostbuster-ghost pairs, and then simultaneously each Ghostbuster will shoot a stream at his chosen ghost. As we all know, it is very dangerous to let streams cross, and so the Ghostbusters must choose pairings for which no streams will cross. Assume that the position of each Ghostbuster and each ghost is a fixed point in the plane and that no three positions are collinear.
+>
+> 1. Argue that there exists a line passing through one Ghostbuster and one ghost such the number of Ghostbusters on one side of the line equals the number of ghosts on the same side. Describe how to nd such a line in O(n log n) time.
+> 2. Give an O(n^2^ log n)-time algorithm to pair Ghostbusters with ghosts in such a way that no streams cross.
+
+### 1
+
+我们记Ghostbusters 为平面上红色的点，ghost为平面上黑色的点。
+
+我们首先证明，给定平面上的点，我们能找到一条经过红色和黑色的点，使得在该直线的一侧有等数量的红色点和黑色点。
+
+平面上有n个红点和n个黑点。找到所有2n个点中纵坐标y最小的点。若有两个（因为没有三点共线）点y相同取横坐标x较小的那一个点，记录该点为点A，设A为红色的点（黑色同理，这里以红色为例）。以A点向其余所有的点连线，计算与x轴正向的夹角(  [1,0] )，然后按照夹角排序。这样，从x轴正向出发，按照夹角的大小扫描点，初始设置cnt_b = cnt_r=0（黑色和红色的点的个数为0），若当前点是红色，那么cnt_r ++ ,若为黑色，则查看cnt_b 是否等于cnt_r，若相等，该点就是我们要找的分界点。否则cnt_b ++.
+
+由于进行排序，所以复杂度为O(nlogn)
+
+### 2
+
+每一次调用方法一的划分，然后分成两边，对每一边递归即可。
+
+由于每次配对1个，并进行一次排序，因此
+$$
+T(n) = T(n-1) + nlog(n)
+$$
+因此复杂度为n^2^logn
+
+
+
 ## Problem 8.
 
 > The attachedfile Q5.txt contains 100,000 integers between 1 and 100,000 (each row has asingle integer), the order of these integers is random and no integer is repeated.

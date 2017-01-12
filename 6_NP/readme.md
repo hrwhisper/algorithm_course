@@ -170,3 +170,50 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 ![5_false](./img/5_false.png)
 
 因此有 $3SAT \leq_p$Directed Disjoint Paths Problem ，所以Directed Disjoint Paths Problem 是NP完全问题。
+
+
+
+
+
+## 6. SIP problem
+
+> The set intersection problem (SIP) is dened as follows: Given finite sets $A_1,A_2,....A_r$,$B_1,B_2,...B_s$ is there a set T such that
+> $$
+> | T \cap  A_i | \ge 1  \quad for \quad i=1,2,....,r
+> $$
+> and
+> $$
+> | T \cap  B_i | \le 1  \quad for \quad i=1,2,....,s
+> $$
+> Prove that the SIP is NP-complete.
+
+首先给定集合T, A~i~ ,B~i~， 很容易判断T和各个A~i~, B~i~的交集数是否满足条件，因此SIP问题是NP问题。
+
+为了证明SIP problem是NP完全问题，我们只需要证明 $3SAT \leq_p$SIP problem 问题即可。
+
+对于一个3SAT问题有n个变量m个子句，我们构造A~i~为其各个子句，则共有m个。构造B为空集，T为$\{T_1,T_2.......T_n\}$ , 若3SAT变量$x_i = True$，那么$T_i= x_i$，否则$T_i= \neg x_i$。
+
+显然3SAT有解SIP也有解，3SAT无解，SIP也无解。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
