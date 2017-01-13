@@ -191,7 +191,13 @@ mine consistency problem = { \<G,φ> |给定图G以及部分周围地雷个数�
 
 为了证明SIP problem是NP完全问题，我们只需要证明 $3SAT \leq_p$SIP problem 问题即可。
 
-对于一个3SAT问题有n个变量m个子句，我们构造A~i~为其各个子句，则共有m个。构造B为空集，T为$\{T_1,T_2.......T_n\}$ , 若3SAT变量$x_i = True$，那么$T_i= x_i$，否则$T_i= \neg x_i$。
+对于一个3SAT问题有n个变量m个子句，我们将每个子句中的项构造一个A~i~，则共有m个。构造B为空集，T为$\{T_1,T_2.......T_n\}$ , 若3SAT变量$x_i = True$，那么$T_i= x_i$，否则$T_i= \neg x_i$。
+
+如$(x_1 \lor x_2 \lor \neg x_3) \land (x_1 \lor x_3 \lor x_4)$ 则 有$A_1 = \{x_1,x_2,\neg x_3\} , A_2 = \{x_1,x_3,x_4\}$ 。
+
+以$x_1 = True,x_2 = True,x_3 = True,x_4=False$为例， $T = \{x_1,x_2,x_3,\neg x_4\} $。
+
+以$x_1 = False,x_2 = False,x_3 = True,x_4=False$为例， $T = \{\neg x_1,\neg x_2,x_3,\neg x_4\} $。
 
 显然3SAT有解SIP也有解，3SAT无解，SIP也无解。
 

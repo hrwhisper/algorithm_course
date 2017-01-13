@@ -297,7 +297,7 @@ The two constraints says every path has a non-negative weight and sum of  every 
 
 So, the objective function is just to minimize the sum of capacity multiply its weight. Obviously, it is designed  to solve the minimum cut problem.
 
-目标函数中 $y_e$ 表示一条边选或者不选，为1选，为2不选，因此目标函数是求最小割。
+目标函数中 $y_e$ 表示一条边选或者不选，为1选，为0不选，因此目标函数是求最小割。
 
 第一个约束条件表示从s到t中的路径，至少有一条边在割上。
 
